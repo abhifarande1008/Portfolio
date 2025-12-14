@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Code2,
   Braces,
@@ -6,6 +8,12 @@ import {
   Layers,
 } from "lucide-react";
 import { JSX } from "react";
+import { motion } from "framer-motion";
+import {
+  fadeContainer,
+  fadeUpItem,
+  cardItem,
+} from "@/lib/animations";
 
 type SkillCategory = {
   title: string;
@@ -19,15 +27,7 @@ const skillsData: SkillCategory[] = [
     title: "Programming Languages",
     subtitle: "Languages I'm proficient in",
     icon: <Code2 className="h-5 w-5 text-primary" />,
-    skills: [
-      "Java",
-      "JavaScript",
-      "TypeScript",
-      "Python",
-      "C++",
-      "HTML",
-      "CSS",
-    ],
+    skills: ["Java", "JavaScript", "TypeScript", "Python", "C++", "HTML", "CSS"],
   },
   {
     title: "Core Competencies",
@@ -62,42 +62,65 @@ const skillsData: SkillCategory[] = [
 
 export default function SkillsSection(): JSX.Element {
   return (
-    <section className="w-full py-12">
-
-      <div className="grid gap-6 md:grid-cols-2">
+    <motion.section
+      id="skills"
+      className="w-full py-16 px-4 sm:px-8"
+      variants={fadeContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.25 }}
+    >
+      {/* Grid */}
+      <motion.div
+        className="mx-auto max-w-6xl grid gap-6 sm:grid-cols-2"
+        variants={fadeContainer}
+      >
         {skillsData.map((category) => (
-          <div
+          <motion.div
             key={category.title}
-            className="rounded-xl border bg-muted/30 p-6 transition hover:shadow-md"
+            variants={cardItem}
+            whileHover={{ scale: 1.02 }}
+            className="rounded-xl border bg-muted/30 p-5 sm:p-6 transition-shadow hover:shadow-md"
           >
             {/* Header */}
-            <div className="mb-4 flex items-center gap-3">
+            <motion.div
+              className="mb-4 flex items-center gap-3"
+              variants={fadeUpItem}
+            >
               <div className="rounded-lg border bg-background p-2">
                 {category.icon}
               </div>
               <div>
-                <h3 className="text-xl font-semibold">{category.title}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold">
+                  {category.title}
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   {category.subtitle}
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Skills */}
-            <div className="flex flex-wrap gap-2">
+            <motion.div
+              className="flex flex-wrap gap-2"
+              variants={fadeContainer}
+            >
               {category.skills.map((skill) => (
-                <span
+                <motion.span
                   key={skill}
-                  className="flex items-center gap-1 rounded-full border bg-background px-3 py-1 text-sm transition hover:bg-primary hover:text-primary-foreground"
+                  variants={fadeUpItem}
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-1 rounded-full border bg-background px-3 py-1 text-xs sm:text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
                 >
                   <Braces className="h-3.5 w-3.5 opacity-60" />
                   {skill}
-                </span>
+                </motion.span>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }

@@ -4,58 +4,50 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import {
+  fadeContainer,
+  fadeUpItem,
+  fadeRightItem,
+} from "@/lib/animations";
 
 export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-10 bg-background text-foreground"
+      className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-10 px-4 sm:px-8 md:px-16 lg:px-24 py-16"
     >
       {/* LEFT CONTENT */}
       <motion.div
-        className="flex-1 max-w-xl"
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        className="w-full md:w-1/2 text-center md:text-left"
+        variants={fadeContainer}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-4xl sm:text-5xl font-bold"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold"
+          variants={fadeUpItem}
         >
           <span className="text-purple-500">Abhishek</span> Farande
         </motion.h1>
 
         <motion.p
-          className="text-muted-foreground mt-2"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-2 text-sm sm:text-base text-muted-foreground"
+          variants={fadeUpItem}
         >
           📍 Kolhapur, Maharashtra
         </motion.p>
 
         <motion.h2
-          className="text-2xl sm:text-3xl font-semibold mt-4"
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-4 text-xl sm:text-2xl lg:text-3xl font-semibold"
+          variants={fadeUpItem}
         >
           Full-Stack Web Developer
         </motion.h2>
 
         <motion.p
-          className="mt-4 text-muted-foreground leading-relaxed"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto md:mx-0"
+          variants={fadeUpItem}
         >
           Passionate developer crafting modern web experiences using
           cutting-edge technologies. Specialized in building responsive,
@@ -63,18 +55,13 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 mt-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-8 flex flex-wrap justify-center md:justify-start gap-3"
+          variants={fadeUpItem}
         >
-          <Link href="#projects">
-            <Button className="bg-primary text-primary-foreground">
-              View Projects
-            </Button>
+          <Link href="/projects">
+            <Button>View Projects</Button>
           </Link>
-          <Link href="#contact">
+          <Link href="/contact">
             <Button variant="outline">Contact Me</Button>
           </Link>
           <Link
@@ -87,21 +74,21 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* PROFILE IMAGE */}
+      {/* IMAGE */}
       <motion.div
-        className="flex-1 mt-10 md:mt-0 flex justify-center md:justify-end"
-        initial={{ opacity: 0, x: 50 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        className="w-full md:w-1/2 flex justify-center md:justify-end"
+        variants={fadeRightItem}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: false, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="rounded-full border-4 border-primary p-1">
           <Image
             src="/image.png"
             alt="profile photo"
-            width={280}
-            height={280}
-            className="rounded-full object-cover"
+            width={240}
+            height={240}
+            className="rounded-full sm:w-[260px] sm:h-[260px] lg:w-[300px] lg:h-[300px]"
           />
         </div>
       </motion.div>
