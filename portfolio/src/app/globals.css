@@ -155,8 +155,7 @@
   }
 
   .interactive-card:hover {
-    box-shadow:
-      0 10px 30px -10px hsl(var(--primary) / 0.25);
+    box-shadow: 0 10px 30px -10px hsl(var(--primary) / 0.25);
   }
 
   .icon-link {
@@ -178,4 +177,51 @@
   .card li:hover {
     @apply text-foreground;
   }
+
+  /* ===== NETFLIX INTRO ===== */
+
+.netflix-text {
+  font-size: 9rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: #e50914;
+  position: relative;
+  z-index: 2;
+  text-shadow:
+    0 0 40px rgba(229, 9, 20, 0.6),
+    0 0 80px rgba(229, 9, 20, 0.45),
+    0 0 140px rgba(229, 9, 20, 0.3);
+}
+
+/* Vertical cinematic beams */
+.netflix-beams {
+  position: absolute;
+  inset: -20%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 60, 0, 0.55) 0px,
+    rgba(255, 60, 0, 0.55) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  transform-origin: center;
+  filter: blur(1px);
+  z-index: 1;
+}
+
+/* Fast light sweep */
+.netflix-sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 120, 0, 0.9) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  filter: blur(2px);
+  z-index: 3;
+  pointer-events: none;
+}
 }

@@ -1,5 +1,5 @@
-import HeroSection from "@/components/sections/HeroSection";
+import IntroWrapper from "@/components/intro/IntroWrapper";
 
-export default function HomePage() {
-  return <HeroSection />;
+export default function Home() {
+  return <IntroWrapper />;
 }

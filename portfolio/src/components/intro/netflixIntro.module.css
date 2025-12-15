@@ -1,0 +1,76 @@
+.wrapper {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.logo {
+  position: relative;
+}
+
+.text {
+  font-size: 9rem;
+  font-weight: 900;
+  color: #e50914;
+  letter-spacing: -0.05em;
+  position: relative;
+  z-index: 2;
+  text-shadow:
+    0 0 40px rgba(229, 9, 20, 0.7),
+    0 0 90px rgba(229, 9, 20, 0.5),
+    0 0 160px rgba(229, 9, 20, 0.3);
+}
+
+/* STRIP MASK SYSTEM */
+.strips {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  z-index: 3;
+}
+
+.strip {
+  background: black;
+  animation: reveal 0.6s ease-out forwards;
+  transform-origin: bottom;
+}
+
+/* Vertical reveal */
+@keyframes reveal {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+/* Light sweep */
+.sweep {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 160, 80, 1) 50%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  animation: sweep 0.5s ease-in-out forwards;
+  animation-delay: 0.25s;
+  z-index: 4;
+}
+
+@keyframes sweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
