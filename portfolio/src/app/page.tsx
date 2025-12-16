@@ -1,5 +1,5 @@
-import IntroWrapper from "@/components/intro/IntroWrapper";
+import HeroSection from "@/components/sections/HeroSection";
 
 export default function Home() {
-  return <IntroWrapper />;
+  return <HeroSection />;
 }

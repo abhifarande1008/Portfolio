@@ -14,7 +14,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-10 px-4 sm:px-8 md:px-16 lg:px-24 py-16"
+      className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center md:justify-between gap-10 px-4 sm:px-8 md:px-16 lg:px-24 pt-8 pb-32"
     >
       {/* LEFT CONTENT */}
       <motion.div

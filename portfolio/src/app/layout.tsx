@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className} flex flex-col min-h-screen`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <Navbar />
-          <main className="pt-16 flex-grow">{children}</main>
+          <main className="pt-24 flex-grow">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

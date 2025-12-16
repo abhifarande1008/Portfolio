@@ -59,7 +59,7 @@ export default function ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="max-w-6xl mx-auto px-4 sm:px-8 py-16"
+      className="max-w-6xl mx-auto px-4 sm:px-8"
       variants={fadeContainer}
       initial="hidden"
       whileInView="show"

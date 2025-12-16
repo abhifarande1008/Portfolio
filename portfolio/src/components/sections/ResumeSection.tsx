@@ -17,7 +17,7 @@ export default function ResumeSection() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className="mx-auto max-w-6xl px-4 py-16"
+      className="mx-auto max-w-6xl px-4 "
     >
       {/* Header */}
       <motion.div
