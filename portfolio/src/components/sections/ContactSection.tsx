@@ -17,12 +17,7 @@ import {
   Mail,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  fadeContainer,
-  fadeUpItem,
-  fadeRightItem,
-  cardItem,
-} from "@/lib/animations";
+import { fadeContainer, fadeUpItem, fadeRightItem, cardItem } from "@/lib/animations";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -32,6 +27,24 @@ const contactSchema = z.object({
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
+
+const socialLinks = [
+  {
+    icon: Github,
+    href: "https://github.com/abhifarande1008",
+    label: "GitHub",
+  },
+  {
+    icon: Linkedin,
+    href: "https://linkedin.com/in/abhishek-farande",
+    label: "LinkedIn",
+  },
+  {
+    icon: Mail,
+    href: "mailto:abhishekfarande90@gmail.com",
+    label: "Mail",
+  },
+];
 
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
@@ -59,30 +72,36 @@ export default function ContactSection() {
   return (
     <motion.section
       id="contact"
-      className="max-w-6xl mx-auto px-4 sm:px-8"
+      className="relative mx-auto max-w-6xl px-4 sm:px-8"
       variants={fadeContainer}
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.3 }}
     >
-      <div className="flex flex-col md:flex-row gap-12">
-        {/* LEFT INFO */}
-        <motion.div className="flex-1 space-y-6">
-          <motion.h3
-            className="text-2xl font-semibold text-center md:text-left"
-            variants={fadeUpItem}
-          >
-            Get In Touch
-          </motion.h3>
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.05),transparent_70%)]" />
 
+      <motion.div variants={fadeUpItem} className="mb-10 space-y-3 text-center md:text-left">
+        <p className="text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
+          CONTACT
+        </p>
+        <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl">
+          Get In Touch
+        </h2>
+        <p className="max-w-2xl text-sm leading-7 text-muted-foreground sm:text-base">
+          Have a project in mind or just want to say hi? 👋
+        </p>
+      </motion.div>
+
+      <div className="flex flex-col gap-12 md:flex-row">
+        <motion.div className="flex-1 space-y-6 text-center md:text-left" variants={fadeContainer}>
           {[MailIcon, Phone, MapPin].map((Icon, i) => (
             <motion.div
               key={i}
               variants={cardItem}
-              className="flex items-start gap-4 rounded-lg bg-secondary p-4 w-full"
+              className="flex items-start gap-4 rounded-2xl border border-purple-500/20 bg-background/60 p-4 transition-all hover:border-purple-500/40"
             >
-              <Icon className="text-purple-500 shrink-0" />
-              <p className="text-sm sm:text-base text-muted-foreground">
+              <Icon className="shrink-0 text-purple-500" />
+              <p className="text-sm text-muted-foreground sm:text-base">
                 {i === 0 && "abhishekfarande81@gmail.com"}
                 {i === 1 && "+91-9326396793"}
                 {i === 2 && "Kolhapur, Maharashtra, India"}
@@ -90,29 +109,34 @@ export default function ContactSection() {
             </motion.div>
           ))}
 
-          <motion.div
-            className="flex justify-center md:justify-start gap-6"
-            variants={fadeUpItem}
-          >
-            {[Github, Linkedin, Mail].map((Icon, i) => (
-              <motion.a
-                key={i}
-                whileHover={{ scale: 1.2 }}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <Icon size={22} />
-              </motion.a>
-            ))}
+          <motion.div className="flex justify-center gap-6 md:justify-start" variants={fadeUpItem}>
+            {socialLinks.map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.label}
+                  className="text-muted-foreground transition-colors hover:text-purple-400"
+                  whileHover={{ scale: 1.2 }}
+                >
+                  <Icon size={22} />
+                </motion.a>
+              );
+            })}
           </motion.div>
         </motion.div>
 
-        {/* FORM */}
         <motion.div
-          className="flex-1 rounded-lg border bg-background p-6 sm:p-8"
+          className="flex-1 overflow-hidden rounded-3xl border border-purple-500/20 bg-background/70 p-6 shadow-2xl shadow-purple-500/10 backdrop-blur-xl sm:p-8"
           variants={fadeRightItem}
         >
+          <div className="h-1 w-full rounded-t-3xl bg-gradient-to-r from-purple-600 to-violet-400 -mt-6 -mx-6 mb-6" />
           <motion.h3
-            className="text-xl sm:text-2xl font-semibold mb-4"
+            className="mb-4 text-lg font-bold tracking-tight text-foreground"
             variants={fadeUpItem}
           >
             Send a Message
@@ -125,23 +149,33 @@ export default function ContactSection() {
           >
             <motion.div variants={fadeUpItem}>
               <Label>Name</Label>
-              <Input {...register("name")} />
+              <Input
+                {...register("name")}
+                className="focus:border-purple-500 focus:ring-purple-500/20"
+              />
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
               <Label>Email</Label>
-              <Input {...register("email")} />
+              <Input
+                {...register("email")}
+                className="focus:border-purple-500 focus:ring-purple-500/20"
+              />
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
               <Label>Message</Label>
-              <Textarea rows={4} {...register("message")} />
+              <Textarea
+                rows={4}
+                {...register("message")}
+                className="focus:border-purple-500 focus:ring-purple-500/20"
+              />
             </motion.div>
 
             <motion.div variants={fadeUpItem}>
               <Button
                 type="submit"
-                className="w-full"
+                className="w-full bg-purple-600 text-white hover:bg-purple-700"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
@@ -150,7 +184,7 @@ export default function ContactSection() {
 
             {submitted && (
               <motion.p
-                className="text-green-600 text-center text-sm"
+                className="text-center text-sm text-green-600"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
               >

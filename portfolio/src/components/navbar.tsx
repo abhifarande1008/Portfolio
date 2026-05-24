@@ -24,31 +24,38 @@ export default function Navbar() {
 
   return (
     <motion.nav
-      className="fixed top-0 left-0 w-full bg-background/70 backdrop-blur-md border-b border-border px-6 sm:px-10 py-4 flex justify-between items-center z-50"
+      className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-border/40 bg-background/80 px-6 py-4 backdrop-blur-md sm:px-10"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
-      {/* Logo */}
       <Link
         href="/"
-        className="cursor-pointer z-50"
+        className="z-50 cursor-pointer transition-opacity hover:opacity-80"
         onClick={() => setMenuOpen(false)}
       >
         <motion.h1
-          className="text-2xl font-bold text-primary"
-          whileHover={{ scale: 1.1, rotate: 5 }}
+          className="flex items-center gap-0 font-mono"
+          whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <span className="text-purple-500">A</span>bhishek
+          <span className="font-mono text-base font-semibold text-foreground">
+            abhishek
+          </span>
+          <span className="font-mono text-base font-semibold text-purple-400">
+            .dev
+          </span>
+          <span className="font-mono text-base text-muted-foreground/60">
+            ()
+          </span>
         </motion.h1>
       </Link>
 
-      {/* Desktop Links */}
-      <div className="hidden md:flex gap-6 text-sm font-medium">
+      <div className="hidden gap-6 text-sm font-medium md:flex">
         {sections.map((section) => {
           const href = section.id === "home" ? "/" : `/${section.id}`;
           const isActive = pathname === href;
+
           return (
             <motion.div
               key={section.id}
@@ -58,44 +65,42 @@ export default function Navbar() {
             >
               <Link
                 href={href}
-                className={`transition pb-1 ${
-                  isActive
-                    ? "text-primary font-semibold border-b-2 border-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                className={`relative pb-1 transition-colors hover:text-purple-400 ${
+                  isActive ? "text-foreground" : "text-muted-foreground"
                 }`}
               >
                 {section.title}
+                {isActive ? (
+                  <span className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-purple-500" />
+                ) : null}
               </Link>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Right Buttons */}
       <div className="flex items-center gap-3 md:gap-4">
-        {/* Theme Toggle */}
         <motion.button
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="p-2 rounded-md border border-border hover:bg-muted transition"
+          className="rounded-full border border-border/50 p-2 transition-all hover:border-purple-500/50 hover:bg-purple-500/10"
           whileTap={{ rotate: 180 }}
           transition={{ duration: 0.5 }}
         >
-          {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          <Moon className="h-5 w-5 block dark:hidden" />
+          <Sun className="hidden h-5 w-5 dark:block" />
         </motion.button>
 
-        {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 rounded-md border border-border hover:bg-muted"
+          className="rounded-md border border-border/50 p-2 transition-all hover:bg-purple-500/10 md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <motion.div
-          className="absolute top-full left-0 w-full bg-background border-t border-border md:hidden flex flex-col items-center gap-4 py-4 z-40 shadow-md"
+          className="absolute left-0 top-full z-40 flex w-full flex-col items-center gap-4 border-t border-border/40 bg-background/95 py-4 shadow-md backdrop-blur-md md:hidden"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100 }}
@@ -103,18 +108,20 @@ export default function Navbar() {
           {sections.map((section) => {
             const href = section.id === "home" ? "/" : `/${section.id}`;
             const isActive = pathname === href;
+
             return (
               <Link
                 key={section.id}
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className={`transition pb-1 text-lg ${
-                  isActive
-                    ? "text-primary font-semibold border-b-2 border-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                className={`relative pb-1 text-lg transition-colors hover:text-purple-400 ${
+                  isActive ? "text-foreground" : "text-muted-foreground"
                 }`}
               >
                 {section.title}
+                {isActive ? (
+                  <span className="absolute bottom-0 left-0 h-0.5 w-full rounded-full bg-purple-500" />
+                ) : null}
               </Link>
             );
           })}
